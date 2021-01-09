@@ -1,27 +1,27 @@
-#include <Servo.h>
-//defining Servos
-Servo servohori;
-int servoh = 0;
-int servohLimitHigh = 160;
-int servohLimitLow = 20;
+#include <Servo.h> //defining Servos
+Servo servohori; // declare horizontal rotatory servo motor
+int servoh = 0; // Defining start position of shaft
+int servohLimitHigh = 160;// upper limmit that is 160 degree
+int servohLimitLow = 20;//lower limit that is 20 degree 
 
-Servo servoverti; 
-int servov = 0; 
-int servovLimitHigh = 160;
-int servovLimitLow = 20;
+Servo servoverti; // declare vertical rotatory servo motor
+int servov = 0; // Defining start position of shaft
+int servovLimitHigh = 160;// upper limmit that is 160 degree
+int servovLimitLow = 20;//lower limit that is 20 degree 
+
 //Assigning LDRs
-int ldrtopl = 2; //top left LDR green
-int ldrtopr = 1; //top right LDR yellow
-int ldrbotl = 3; // bottom left LDR blue
-int ldrbotr = 0; // bottom right LDR orange
+int ldrtopl = 2; //top left LDR 
+int ldrtopr = 1; //top right LDR 
+int ldrbotl = 3; // bottom left LDR 
+int ldrbotr = 0; // bottom right LDR 
 
  void setup () 
  {
-  servohori.attach(10);
-  servohori.write(0);
-  servoverti.attach(9);
-  servoverti.write(0);
-  delay(500);
+  servohori.attach(10);// declaring the pin connected to horizontal rotatory servo motor
+  servohori.write(0);// Defining start position of shaft
+  servoverti.attach(9);;// declaring the pin connected to vertical rotatory servo motor
+  servoverti.write(0);// Defining start position of shaft
+  delay(500);//delay if 500ms
  }
 
 void loop()
@@ -39,12 +39,13 @@ void loop()
   int avgleft = (topl + botl) / 2; //average of left LDRs
   int avgright = (topr + botr) / 2; //average of right LDRs
 
+//For vertical movement
   if (avgtop < avgbot)
   {
     servoverti.write(servov +1);
     if (servov > servovLimitHigh) 
      { 
-      servov = servovLimitHigh;
+        servov = servovLimitHigh;
      }
     delay(10);
   }
@@ -52,22 +53,23 @@ void loop()
   {
     servoverti.write(servov -1);
     if (servov < servovLimitLow)
-  {
-    servov = servovLimitLow;
-  }
+    {
+      servov = servovLimitLow;
+    }
     delay(10);
   }
   else 
   {
     servoverti.write(servov);
   }
-  
+
+  //For Horizontal Movement
   if (avgleft > avgright)
   {
     servohori.write(servoh +1);
     if (servoh > servohLimitHigh)
     {
-    servoh = servohLimitHigh;
+      servoh = servohLimitHigh;
     }
     delay(10);
   }
@@ -76,7 +78,7 @@ void loop()
     servohori.write(servoh -1);
     if (servoh < servohLimitLow)
      {
-     servoh = servohLimitLow;
+        servoh = servohLimitLow;
      }
     delay(10);
   }
